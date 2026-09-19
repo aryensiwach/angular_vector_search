@@ -1,0 +1,77 @@
+<style>
+  .container {
+    max-width: 700px;
+    margin: 50px auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+  .upload-box {
+    border: 1px solid #333;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #111;
+    margin-bottom: 30px;
+  }
+  input[type='file'] {
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+  .btn {
+    background-color: white;
+    color: black;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .btn:disabled {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+  }
+  .preview-img {
+    max-width: 180px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+  }
+  .grid img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+</style>
+
+<div class="container">
+  <h1 style="margin-bottom: 5px">Vector Search</h1>
+  <p style="color: #777; margin-bottom: 40px">Find similar images using AI</p>
+
+  <div class="upload-box">
+    <form (submit)="search($event)">
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+
+      <div *ngIf="previewUrl">
+        <img [src]="previewUrl" class="preview-img" />
+      </div>
+
+      <button type="submit" class="btn" [disabled]="isLoading || !selectedFile">
+        {{ isLoading ? 'Searching...' : 'Search' }}
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="images.length > 0" class="grid">
+    <img *ngFor="let img of images" [src]="img" />
+  </div>
+</div>

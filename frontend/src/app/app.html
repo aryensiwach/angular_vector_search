@@ -1,0 +1,18 @@
+<div
+  style="
+    padding: 15px;
+    background: #222;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  "
+>
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+    >Search Page</a
+  >
+  <a routerLink="/admin" routerLinkActive="active">Convert Vector</a>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>
