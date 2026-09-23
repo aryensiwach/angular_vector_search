@@ -12,9 +12,6 @@ CORS(app)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 DB_FOLDER = 'static/db_images'
 
-# Folders automatically bana dega agar nahi honge
-# os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-# os.makedirs(DB_FOLDER, exist_ok=True)
 
 searcher = ImageSearcher(index_path='index.faiss', paths_path='image_paths.npy')
 
@@ -25,11 +22,11 @@ def search():
         if not file:
             return jsonify({'error': 'No file uploaded'}), 400
             
-        # Hum folder ka chakkar hata rahe hain, seedha ek temp file save karenge
+       
         query_path = "temp_query_image.jpg"
         file.save(query_path)
         
-        # Search functionality
+      
         results = searcher.search(query_path, k=10)
         
         # URL formatting
@@ -37,8 +34,8 @@ def search():
         return jsonify({'results': image_urls})
         
     except Exception as e:
-        # Ye Python terminal me error print karega
-        print(f"\n❌ PYTHON ERROR: {str(e)}\n")
+       
+        print(f"\n PYTHON ERROR: {str(e)}\n")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/build-index', methods=['POST'])

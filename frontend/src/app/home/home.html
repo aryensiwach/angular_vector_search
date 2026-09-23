@@ -72,6 +72,9 @@
   </div>
 
   <div *ngIf="images.length > 0" class="grid">
-    <img *ngFor="let img of images" [src]="img" />
+    <div *ngFor="let img of images" class="img-card">
+      <img [src]="img" />
+      <p class="img-name">{{ getname(img) }}</p>
+    </div>
   </div>
 </div>
